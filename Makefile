@@ -21,6 +21,9 @@ NET_DIR      = $(PHWANG_DIR)/net_dir
 
 
 SERVER_DIR   = $(SERVER_PROJ_DIR)/server_dir
+FABRIC_DIR   = $(SERVER_PROJ_DIR)/fabric_dir
+D_FABRIC_DIR  = $(FABRIC_DIR)/d_fabric_dir
+U_FABRIC_DIR  = $(FABRIC_DIR)/u_fabric_dir
 MMW_DIR   = $(SERVER_PROJ_DIR)/mmw_dir
 
 
@@ -40,7 +43,11 @@ MMW_OBJS = $(MMW_DIR)/mmw_class.o $(MMW_DIR)/mmw_input_class.o
 
 
 SERVER_OBJS = $(SERVER_DIR)/server_main.o $(SERVER_DIR)/server_root_class.o $(MMW_OBJS)
-SERVER_PROJ_OBJS = $(SERVER_OBJS)
+D_FABRIC_OBJS = $(D_FABRIC_DIR)/d_fabric_class.o $(D_FABRIC_DIR)/d_fabric_transmit.o $(D_FABRIC_DIR)/d_fabric_parse.o
+U_FABRIC_OBJS = $(U_FABRIC_DIR)/u_fabric_class.o $(U_FABRIC_DIR)/u_fabric_transmit.o $(U_FABRIC_DIR)/u_fabric_parse.o 
+FABRIC_OBJS = $(U_FABRIC_OBJS) $(D_FABRIC_OBJS) $(FABRIC_DIR)/fabric_class.o $(FABRIC_DIR)/fabric_thread.o $(FABRIC_DIR)/link_class.o $(FABRIC_DIR)/session_class.o $(FABRIC_DIR)/group_class.o $(FABRIC_DIR)/name_list_class.o 
+SERVER_PROJ_OBJS = $(SERVER_OBJS) $(FABRIC_OBJS) 
+#SERVER_PROJ_OBJS = $(SERVER_OBJS) $(FABRIC_OBJS) $(THEME_OBJS) $(ENGINE_OBJS) $(TEST_OBJS)
 
 SERVER = server
 ALL_SERVER_OBJS	= $(PHWANG_OBJS) $(SERVER_PROJ_OBJS)

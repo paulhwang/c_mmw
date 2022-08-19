@@ -7,14 +7,14 @@
 #pragma once
 
 class MmwClass;
-//class FabricClass;
+class FabricClass;
 //class ThemeClass;
 //class EngineClass;
 //class TestClass;
 
 class ServerRootClass {
     MmwClass *theMmwObject;
-    //FabricClass *theFabricObject;
+    FabricClass *theFabricObject;
     //ThemeClass *theGoThemeObject;
     //EngineClass *theEngineObject;
     //TestClass *theTestObject;
