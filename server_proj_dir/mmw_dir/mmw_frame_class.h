@@ -24,8 +24,9 @@ class MmwFrameClass {
     void addLineArrayElement(char *data_val) { this->theLineArray[this->theArraySize] = data_val; this->theArraySize++; }
 
     void printFrameArray(void) {
+        printf("\n*****************************\n");
         for (int i = 0; i < this->theArraySize; i++) {
-            printf("%s\n", this->theLineArray[i]);
+            printf("###%s\n", this->theLineArray[i]);
         }
     }
 

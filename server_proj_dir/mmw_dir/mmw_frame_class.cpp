@@ -9,7 +9,7 @@
 
 MmwFrameClass::MmwFrameClass (void)
 {
-    this->debug(true, "MmwFrameClass", "start");
+    this->debug(false, "MmwFrameClass", "start");
 
     this->theArraySize = 0;
     this->theLineArray = (char **) malloc(sizeof(char *) * this->theMaxArraySize);
@@ -18,7 +18,7 @@ MmwFrameClass::MmwFrameClass (void)
 
 MmwFrameClass::~MmwFrameClass (void)
 {
-    this->debug(true, "~MmwFrameClass", "exit");
+    this->debug(false, "~MmwFrameClass", "start");
     for (int i = 0; i < this->theArraySize; i++) {
         if (this->theLineArray[i]) {
             free(this->theLineArray[i]);
