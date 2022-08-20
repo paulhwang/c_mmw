@@ -34,7 +34,7 @@ NET_OBJS = $(NET_DIR)/tp_server_class.o $(NET_DIR)/tp_transfer_class.o $(NET_DIR
 DB_OBJS = $(DB_DIR)/db_root_class.o $(DB_DIR)/db_postgre.o
 PHWANG_OBJS = $(PHWANG_DIR)/phwang.o $(PHWANG_DIR)/phwang_class.o $(JSON_OBJS) $(SUSPEND_OBJS) $(LIST_MGR_OBJS) $(ARRAY_MGR_OBJS) $(ID_INDEX_LIST_OBJS) $(QUEUE_OBJS) $(NET_OBJS)
 
-MMW_OBJS = $(MMW_DIR)/mmw_class.o $(MMW_DIR)/mmw_input_class.o
+MMW_OBJS = $(MMW_DIR)/mmw_class.o $(MMW_DIR)/mmw_input_class.o $(MMW_DIR)/mmw_frame_class.o
 
 
 

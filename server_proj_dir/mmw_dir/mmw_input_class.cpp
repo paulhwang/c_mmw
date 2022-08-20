@@ -6,6 +6,7 @@
 
 #include "../../phwang_dir/phwang.h"
 #include "mmw_input_class.h"
+#include "mmw_frame_class.h"
 
 MmwInputClass::MmwInputClass (MmwClass *mmw_object_val)
 {
@@ -30,13 +31,12 @@ void MmwInputClass::readInput(char const *filename_ptr) {
     int data_array_size;
     char **data_array = this->readFrame(fp, &data_array_size);
     for (int i = 0; i < data_array_size; i++) {
-        printf("!!!%s\n", data_array[i]);
+        printf("@@@%s\n", data_array[i]);
     }
 }
 
 char **MmwInputClass::readFrame(FILE *fp_val, int *data_array_size_val) {
-    char **buf_array = (char **) malloc(2048);
-    int array_size = 0;
+    MmwFrameClass *frame_object = new MmwFrameClass();
     char last_frame_buf[1026];
     int not_frame = 1;
 
@@ -49,19 +49,20 @@ char **MmwInputClass::readFrame(FILE *fp_val, int *data_array_size_val) {
             strcpy(last_frame_buf, buf);
             not_frame = 0;
 
-            for (int i = 0; i < array_size; i++) {
-                printf("===%s\n", buf_array[i]);
+            for (int i = 0; i < frame_object->arraySize(); i++) {
+                printf("===%s\n", frame_object->lineArrayElement(i));
             }
 
-            *data_array_size_val = array_size;
-            return buf_array;
+            *data_array_size_val = frame_object->arraySize();
+            return frame_object->lineArray();
         }
 
-        buf_array[array_size] = (char *) malloc(strlen(buf) + 1);
-        strcpy(buf_array[array_size], buf);
+        char *line_data = (char *) malloc(strlen(buf) + 1);
+        strcpy(line_data, buf);
+        frame_object->addLineArrayElement(line_data);
         //printf("qq%s\n", buf);
         //printf("ss%s\n", buf_array[array_size]);
-        array_size++;
+        frame_object->incrementArraySize();
     }
 
 
