@@ -17,8 +17,10 @@ class MmwFrameClass {
     char **theLineArray;
     int theFrameType;
 
-    char *frameNumberStr(void) { return this->theLineArray[0]; }
-    char *pointeNumberStr(void) { return this->theLineArray[1]; }
+    int theFrameNumberIndex = 0;
+    char *frameNumberStr(void) { return this->theLineArray[0] + this->theFrameNumberIndex; }
+    int thePointNumberIndex = 0;
+    char *pointeNumberStr(void) { return this->theLineArray[1] + this->thePointNumberIndex; }
     char **clouePointStrArray(void) { return &this->theLineArray[2]; }
 
     void porcessHeaderFrame(void);

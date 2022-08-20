@@ -30,11 +30,12 @@ MmwFrameClass::~MmwFrameClass (void)
 
 void MmwFrameClass::parseFrame (void)
 {
-    if (memcmp(this->theLineArray[0], "frameNum", 7) != 0) {
-        this->porcessHeaderFrame();
+    if (memcmp(this->theLineArray[0], "frameNum: ", 10) == 0) {
+        this->theFrameNumberIndex = 10;
+        this->porcessNormalFrame();
     }
     else {
-        this->porcessNormalFrame();
+        this->porcessHeaderFrame();
     }
 }
 
@@ -47,13 +48,16 @@ void MmwFrameClass::porcessHeaderFrame (void)
 void MmwFrameClass::porcessNormalFrame (void)
 {
     this->theFrameType = MMW_FRAME_CLASS_TYPE_NORMAL;
+    this->debug(false, "porcessNormalFrame", this->frameNumberStr());
 
     if (memcmp(this->pointeNumberStr(), " PointNumber: ", 14) != 0) {
         this->abend("porcessNormalFrame", "ointeNumber not match");
         return;
     }
 
-    this->debug(true, "porcessNormalFrame", this->pointeNumberStr() + 14);
+
+    this->thePointNumberIndex = 14;
+    this->debug(false, "porcessNormalFrame", this->pointeNumberStr());
 }
 
 void MmwFrameClass::logit (char const *str0_val, char const *str1_val)
