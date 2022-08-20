@@ -12,7 +12,7 @@ MmwInputClass::MmwInputClass (MmwClass *mmw_object_val)
     this->debug(true, "MmwInputClass", "start");
     this->theMmwObject = mmw_object_val;
 
-    this->readInput();
+    this->readInput("data/walking_around.txt");
 }
 
 MmwInputClass::~MmwInputClass (void)
@@ -20,37 +20,47 @@ MmwInputClass::~MmwInputClass (void)
     this->debug(true, "~MmwInputClass", "exit");
 }
 
-void MmwInputClass::readInput() {
-    FILE *fp = this->openFile("data/walking_around.txt", "r");
+void MmwInputClass::readInput(char const *filename_ptr) {
+    FILE *fp = this->openFile(filename_ptr, "r");
     if (fp == 0) {
         this->logit("openFile", "cannot open file");
         return;
     }
 
     char buf[1024];
-
     for (int i = 0; i < 30; i++) {
-        int index = 0;
-
-        while (1) {
-            int c = getc(fp);
-            if (c == 13) {
-                continue;
-            }
-
-            if (c == 10) {
-                buf[index] = 0;
-                break;
-            }
-
-            buf[index++] = c;
-         }
-
-        //int ii = fscanf(fp, "aaa %i\n", strlen(buf);
+        this->readNonemptyLine(fp, buf);
         printf("%s\n", buf);
     }
+}
 
 
+void MmwInputClass::readNonemptyLine(FILE *fp_val, char *buf_val) {
+    while (1) {
+        this->readLine(fp_val, buf_val);
+        if (buf_val[0]) {
+            return;
+        }
+    }
+}
+
+
+void MmwInputClass::readLine(FILE *fp_val, char *buf_val) {
+    int index = 0;
+
+    while (1) {
+        int c = getc(fp_val);
+        if (c == 13) {
+            continue;
+        }
+
+        if (c == 10) {
+            buf_val[index] = 0;
+            break;
+        }
+
+        buf_val[index++] = c;
+     }
 }
 
 FILE *MmwInputClass::openFile(char const *filename_val, char const *mode_val)
