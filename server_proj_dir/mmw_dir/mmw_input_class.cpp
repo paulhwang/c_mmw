@@ -28,14 +28,13 @@ void MmwInputClass::readInput(char const *filename_ptr) {
         return;
     }
     
-    int data_array_size;
-    char **data_array = this->readFrame(fp, &data_array_size);
-    for (int i = 0; i < data_array_size; i++) {
-        printf("@@@%s\n", data_array[i]);
+    MmwFrameClass *frame_object = this->readFrame(fp);
+    for (int i = 0; i < frame_object->arraySize(); i++) {
+        printf("!!!%s\n", frame_object->lineArrayElement(i));
     }
 }
 
-char **MmwInputClass::readFrame(FILE *fp_val, int *data_array_size_val) {
+MmwFrameClass *MmwInputClass::readFrame(FILE *fp_val) {
     MmwFrameClass *frame_object = new MmwFrameClass();
     char last_frame_buf[1026];
     int not_frame = 1;
@@ -53,8 +52,7 @@ char **MmwInputClass::readFrame(FILE *fp_val, int *data_array_size_val) {
                 printf("===%s\n", frame_object->lineArrayElement(i));
             }
 
-            *data_array_size_val = frame_object->arraySize();
-            return frame_object->lineArray();
+            return frame_object;
         }
 
         char *line_data = (char *) malloc(strlen(buf) + 1);

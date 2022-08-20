@@ -7,13 +7,14 @@
 #pragma once
 
 class MmwClass;
+class MmwFrameClass;
 
 class MmwInputClass {
     MmwClass *theMmwObject;
 
     void readInput(char const *filename_ptr);
     FILE *openFile(char const *filename_val, char const *mode_val);
-    char **readFrame(FILE *fp_val, int *data_array_size_val);
+    MmwFrameClass *readFrame(FILE *fp_val);
     void readNonemptyLine(FILE *fp_val, char *buf_val);
     void readLine(FILE *fp_val, char *buf_val);
 
