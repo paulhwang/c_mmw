@@ -28,45 +28,62 @@ void MmwInputClass::readInput(char const *filename_ptr) {
         return;
     }
     
-    MmwFrameClass *frame_object = this->readFrame(fp);
+    char *first_line = 0;
+    MmwFrameClass *frame_object = this->readFrame(fp, &first_line);
+    frame_object->printFrameArray();
+    delete frame_object;
+
+    frame_object = this->readFrame(fp, &first_line);
     frame_object->printFrameArray();
     delete frame_object;
 }
 
-MmwFrameClass *MmwInputClass::readFrame(FILE *fp_val) {
+MmwFrameClass *MmwInputClass::readFrame(FILE *fp_val, char **first_line_ptr_val) {
     MmwFrameClass *frame_object = new MmwFrameClass();
-    char last_frame_buf[1026];
-    int not_frame = 1;
+
+    if (*first_line_ptr_val) {
+        frame_object->addLineArrayElement(*first_line_ptr_val);
+    }
 
     while (1) {
-        char buf[1024];
+        char line_buf[1024];
 
-        this->readNonemptyLine(fp_val, buf);
-        printf("=%s\n", buf);
-        if (memcmp(buf, "frameNum", 7) == 0) {
-            strcpy(last_frame_buf, buf);
-            not_frame = 0;
+        this->readNonemptyLine(fp_val, line_buf);
+
+        if (strlen(line_buf) == 0) {
+            *first_line_ptr_val = 0;
+            printf("*********************EOF\n");
+            delete frame_object;
+            return 0;
+        }
+        else {
+            printf("=%s\n", line_buf);
+        }
+
+        char *line_data = (char *) malloc(strlen(line_buf) + 1);
+        strcpy(line_data, line_buf);
+
+        if (memcmp(line_buf, "frameNum", 7) == 0) {
+            *first_line_ptr_val = line_data;
             return frame_object;
         }
 
-        char *line_data = (char *) malloc(strlen(buf) + 1);
-        strcpy(line_data, buf);
         frame_object->addLineArrayElement(line_data);
     }
 }
 
 
-void MmwInputClass::readNonemptyLine(FILE *fp_val, char *buf_val) {
+void MmwInputClass::readNonemptyLine(FILE *fp_val, char *line_buf_val) {
     while (1) {
-        this->readLine(fp_val, buf_val);
-        if (buf_val[0]) {
+        this->readLine(fp_val, line_buf_val);
+        if (line_buf_val[0]) {
             return;
         }
     }
 }
 
 
-void MmwInputClass::readLine(FILE *fp_val, char *buf_val) {
+void MmwInputClass::readLine(FILE *fp_val, char *line_buf_val) {
     int index = 0;
 
     while (1) {
@@ -76,11 +93,11 @@ void MmwInputClass::readLine(FILE *fp_val, char *buf_val) {
         }
 
         if (c == 10) {
-            buf_val[index] = 0;
+            line_buf_val[index] = 0;
             break;
         }
 
-        buf_val[index++] = c;
+        line_buf_val[index++] = c;
      }
 }
 

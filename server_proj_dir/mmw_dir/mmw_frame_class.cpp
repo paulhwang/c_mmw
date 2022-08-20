@@ -11,8 +11,6 @@ MmwFrameClass::MmwFrameClass (void)
 {
     this->debug(true, "MmwFrameClass", "start");
 
-    printf("ssize=%d\n", (int) sizeof(char *));
-
     this->theArraySize = 0;
     this->theLineArray = (char **) malloc(sizeof(char *) * this->theMaxArraySize);
     memset(this->theLineArray, 0, sizeof(char *) * this->theMaxArraySize);

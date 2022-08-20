@@ -14,7 +14,7 @@ class MmwInputClass {
 
     void readInput(char const *filename_ptr);
     FILE *openFile(char const *filename_val, char const *mode_val);
-    MmwFrameClass *readFrame(FILE *fp_val);
+    MmwFrameClass *readFrame(FILE *fp_val, char **first_line_ptr_val);
     void readNonemptyLine(FILE *fp_val, char *buf_val);
     void readLine(FILE *fp_val, char *buf_val);
 
