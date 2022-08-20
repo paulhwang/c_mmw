@@ -29,9 +29,8 @@ void MmwInputClass::readInput(char const *filename_ptr) {
     }
     
     MmwFrameClass *frame_object = this->readFrame(fp);
-    for (int i = 0; i < frame_object->arraySize(); i++) {
-        printf("!!!%s\n", frame_object->lineArrayElement(i));
-    }
+    frame_object->printFrameArray();
+    delete frame_object;
 }
 
 MmwFrameClass *MmwInputClass::readFrame(FILE *fp_val) {
@@ -43,27 +42,17 @@ MmwFrameClass *MmwInputClass::readFrame(FILE *fp_val) {
         char buf[1024];
 
         this->readNonemptyLine(fp_val, buf);
-        printf("%s\n", buf);
+        printf("=%s\n", buf);
         if (memcmp(buf, "frameNum", 7) == 0) {
             strcpy(last_frame_buf, buf);
             not_frame = 0;
-
-            for (int i = 0; i < frame_object->arraySize(); i++) {
-                printf("===%s\n", frame_object->lineArrayElement(i));
-            }
-
             return frame_object;
         }
 
         char *line_data = (char *) malloc(strlen(buf) + 1);
         strcpy(line_data, buf);
         frame_object->addLineArrayElement(line_data);
-        //printf("qq%s\n", buf);
-        //printf("ss%s\n", buf_array[array_size]);
-        frame_object->incrementArraySize();
     }
-
-
 }
 
 
