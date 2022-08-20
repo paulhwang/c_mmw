@@ -36,13 +36,16 @@ void MmwInputClass::readInput(char const *filename_ptr) {
 
     while (1) {
         frame_object = this->readFrame(fp, &first_line, &eof);
-        if (eof) {
-            printf("*********************EOF************\n");
-            return;
-        }
-        frame_object->printFrameArray();
 
-        delete frame_object;
+        if (frame_object) {
+            frame_object->printFrameArrayBrief();
+            delete frame_object;
+        }
+
+        if (eof) {
+            //printf("*********************EOF************\n");
+            break;
+        }
     }
 }
 
@@ -60,11 +63,11 @@ MmwFrameClass *MmwInputClass::readFrame(FILE *fp_val, char **first_line_ptr_val,
 
         if (*eof_val) {
             *first_line_ptr_val = 0;
-            delete frame_object;
-            return 0;
+            //delete frame_object;
+            return frame_object;
         }
         else {
-            printf("=%s\n", line_buf);
+            //printf("=%s\n", line_buf);
         }
 
         char *line_data = (char *) malloc(strlen(line_buf) + 1);
@@ -83,7 +86,12 @@ MmwFrameClass *MmwInputClass::readFrame(FILE *fp_val, char **first_line_ptr_val,
 void MmwInputClass::readNonemptyLine(FILE *fp_val, char *line_buf_val, int *eof_val) {
     while (1) {
         this->readLine(fp_val, line_buf_val, eof_val);
-        if (line_buf_val[0]) {
+
+        if (*eof_val) {
+            return;
+        }
+
+        if (line_buf_val[0] != 0) {
             return;
         }
     }
@@ -95,6 +103,12 @@ void MmwInputClass::readLine(FILE *fp_val, char *line_buf_val, int *eof_val) {
 
     while (1) {
         int c = getc(fp_val);
+
+        if (c == EOF) {
+            *eof_val = 1;
+            return;
+        }
+
         if (c == 13) {
             continue;
         }
@@ -104,14 +118,9 @@ void MmwInputClass::readLine(FILE *fp_val, char *line_buf_val, int *eof_val) {
             break;
         }
 
-        if (c == EOF) {
-            *eof_val = 1;
-            return;
-        }
-
         line_buf_val[index++] = c;
      }
-     
+
      *eof_val = 0;
      return;
 }
