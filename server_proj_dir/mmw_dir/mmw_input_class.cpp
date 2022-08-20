@@ -27,11 +27,28 @@ void MmwInputClass::readInput(char const *filename_ptr) {
         return;
     }
 
-    char buf[1024];
-    for (int i = 0; i < 30; i++) {
-        this->readNonemptyLine(fp, buf);
-        printf("%s\n", buf);
+    char buf_array[300][1024];
+    int array_size = 0;
+    char last_frame_buf[1026];
+    int not_frame = 1;
+
+    while (1) {
+        this->readNonemptyLine(fp, buf_array[array_size]);
+        printf("%s\n", buf_array[array_size]);
+        if (memcmp(buf_array[array_size], "frameNum", 7) == 0) {
+            strcpy(last_frame_buf, buf_array[array_size]);
+            not_frame = 0;
+
+            for (int i = 0; i < array_size; i++) {
+                printf("+++%s\n", buf_array[i]);
+            }
+
+            break;
+        }
+        array_size++;
     }
+
+
 }
 
 

@@ -13,6 +13,7 @@ class MmwInputClass {
 
     void readInput(char const *filename_ptr);
     FILE *openFile(char const *filename_val, char const *mode_val);
+    //void readFrame(char buf_array_val[][]);
     void readNonemptyLine(FILE *fp_val, char *buf_val);
     void readLine(FILE *fp_val, char *buf_val);
 
