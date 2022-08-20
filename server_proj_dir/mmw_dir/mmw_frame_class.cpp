@@ -28,6 +28,28 @@ MmwFrameClass::~MmwFrameClass (void)
     free(this->theLineArray);
 }
 
+void MmwFrameClass::parseFrame (void)
+{
+    if (memcmp(this->theLineArray[0], "frameNum", 7) != 0) {
+        this->porcessHeaderFrame();
+    }
+    else {
+        this->porcessNormalFrame();
+    }
+}
+
+
+void MmwFrameClass::porcessHeaderFrame (void)
+{
+    this->theFrameType = MMW_FRAME_CLASS_TYPE_HEADER;
+}
+
+void MmwFrameClass::porcessNormalFrame (void)
+{
+    this->theFrameType = MMW_FRAME_CLASS_TYPE_NORMAL;
+
+}
+
 void MmwFrameClass::logit (char const *str0_val, char const *str1_val)
 {
     char s[LOGIT_BUF_SIZE];
