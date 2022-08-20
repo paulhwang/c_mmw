@@ -17,15 +17,11 @@ QUEUE_DIR         = $(PHWANG_DIR)/queue_dir
 NET_DIR      = $(PHWANG_DIR)/net_dir
 
 
-
-
-
 SERVER_DIR   = $(SERVER_PROJ_DIR)/server_dir
 FABRIC_DIR   = $(SERVER_PROJ_DIR)/fabric_dir
 D_FABRIC_DIR  = $(FABRIC_DIR)/d_fabric_dir
 U_FABRIC_DIR  = $(FABRIC_DIR)/u_fabric_dir
 MMW_DIR   = $(SERVER_PROJ_DIR)/mmw_dir
-
 
 
 SON_OBJS = $(JSON_DIR)/json_class.o 
