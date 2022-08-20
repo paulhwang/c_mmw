@@ -27,7 +27,7 @@ void MmwInputClass::readInput(char const *filename_ptr) {
         return;
     }
 
-    char buf_array[300][1024];
+    char *buf_array[300];
     int array_size = 0;
     char last_frame_buf[1026];
     int not_frame = 1;
@@ -42,11 +42,13 @@ void MmwInputClass::readInput(char const *filename_ptr) {
             not_frame = 0;
 
             for (int i = 0; i < array_size; i++) {
-                printf("+++%s\n", buf_array[i]);
+                printf("===%s\n", buf_array[i]);
             }
 
             break;
         }
+
+        buf_array[array_size] = (char *) malloc(strlen(buf) + 1);
         strcpy(buf_array[array_size], buf);
         //printf("qq%s\n", buf);
         //printf("ss%s\n", buf_array[array_size]);
