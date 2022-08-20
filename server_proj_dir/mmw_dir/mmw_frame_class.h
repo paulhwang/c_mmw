@@ -17,6 +17,10 @@ class MmwFrameClass {
     char **theLineArray;
     int theFrameType;
 
+    char *frameNumberStr(void) { return this->theLineArray[0]; }
+    char *pointeNumberStr(void) { return this->theLineArray[1]; }
+    char **clouePointStrArray(void) { return &this->theLineArray[2]; }
+
     void porcessHeaderFrame(void);
     void porcessNormalFrame(void);
 

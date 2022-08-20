@@ -48,6 +48,12 @@ void MmwFrameClass::porcessNormalFrame (void)
 {
     this->theFrameType = MMW_FRAME_CLASS_TYPE_NORMAL;
 
+    if (memcmp(this->pointeNumberStr(), " PointNumber: ", 14) != 0) {
+        this->abend("porcessNormalFrame", "ointeNumber not match");
+        return;
+    }
+
+    this->debug(true, "porcessNormalFrame", this->pointeNumberStr() + 14);
 }
 
 void MmwFrameClass::logit (char const *str0_val, char const *str1_val)

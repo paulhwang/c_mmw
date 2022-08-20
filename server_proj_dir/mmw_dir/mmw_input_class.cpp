@@ -39,6 +39,7 @@ void MmwInputClass::readInput(char const *filename_ptr) {
 
         if (frame_object) {
             frame_object->printFrameArrayBrief();
+            frame_object->parseFrame();
             delete frame_object;
         }
 
