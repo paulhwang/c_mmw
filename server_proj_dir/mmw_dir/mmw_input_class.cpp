@@ -33,10 +33,12 @@ void MmwInputClass::readInput(char const *filename_ptr) {
     int not_frame = 1;
 
     while (1) {
-        this->readNonemptyLine(fp, buf_array[array_size]);
-        printf("%s\n", buf_array[array_size]);
-        if (memcmp(buf_array[array_size], "frameNum", 7) == 0) {
-            strcpy(last_frame_buf, buf_array[array_size]);
+        char buf[1024];
+
+        this->readNonemptyLine(fp, buf);
+        printf("%s\n", buf);
+        if (memcmp(buf, "frameNum", 7) == 0) {
+            strcpy(last_frame_buf, buf);
             not_frame = 0;
 
             for (int i = 0; i < array_size; i++) {
@@ -45,6 +47,9 @@ void MmwInputClass::readInput(char const *filename_ptr) {
 
             break;
         }
+        strcpy(buf_array[array_size], buf);
+        //printf("qq%s\n", buf);
+        //printf("ss%s\n", buf_array[array_size]);
         array_size++;
     }
 
