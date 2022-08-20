@@ -26,7 +26,15 @@ void MmwInputClass::readInput(char const *filename_ptr) {
         this->logit("openFile", "cannot open file");
         return;
     }
+    
+    int data_array_size;
+    char **data_array = this->readFrame(fp, &data_array_size);
+    for (int i = 0; i < data_array_size; i++) {
+        printf("!!!%s\n", data_array[i]);
+    }
+}
 
+char **MmwInputClass::readFrame(FILE *fp_val, int *data_array_size_val) {
     char **buf_array = (char **) malloc(2048);
     int array_size = 0;
     char last_frame_buf[1026];
@@ -35,17 +43,18 @@ void MmwInputClass::readInput(char const *filename_ptr) {
     while (1) {
         char buf[1024];
 
-        this->readNonemptyLine(fp, buf);
+        this->readNonemptyLine(fp_val, buf);
         printf("%s\n", buf);
         if (memcmp(buf, "frameNum", 7) == 0) {
             strcpy(last_frame_buf, buf);
             not_frame = 0;
 
             for (int i = 0; i < array_size; i++) {
-                printf("xxx%s\n", buf_array[i]);
+                printf("===%s\n", buf_array[i]);
             }
 
-            break;
+            *data_array_size_val = array_size;
+            return buf_array;
         }
 
         buf_array[array_size] = (char *) malloc(strlen(buf) + 1);
