@@ -25,8 +25,8 @@ class MmwFrameClass {
     char *pointeNumberStr(void) { return this->theLineArray[1] + this->thePointNumberIndex; }
     char **clouePointStrArray(void) { return &this->theLineArray[2]; }
     char **targetStrArray(void) { return &this->theLineArray[2 + this->thePointNumber]; }
-    char *idleMappingStr(void) { return this->theLineArray[2 + this->thePointNumber + 13]; }
-    char *activeMappingStr(void) { return this->theLineArray[2 + this->thePointNumber + 16]; }
+    char *idleMappingStr(void) { return this->targetStrArray()[13]; }
+    char *activeMappingStr(void) { return this->targetStrArray()[16]; }
 
     void parseHeaderFrame(void);
     void parseNormalFrame(void);
