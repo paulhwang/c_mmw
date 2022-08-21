@@ -82,7 +82,11 @@ void MmwFrameClass::parseIdleFrame (void)
 void MmwFrameClass::parseActiveFrame (void)
 {
     this->debug(true, "parseActiveFrame", this->frameNumberStr());
-     printf("activeMappingStr=%s\n", this->activeMappingStr());
+    printf("activeMappingStr=%s\n", this->activeMappingStr());
+    for (int i = 0; i < 16; i++) {
+        printf("target=%s\n", this->targetStrArray()[i]);
+        printf("target=%s\n", this->targetStrArray()[i] + 2);
+    }
 }
 
 void MmwFrameClass::logit (char const *str0_val, char const *str1_val)
