@@ -32,6 +32,8 @@ void MmwFrameClass::parseFrame (void)
 {
     if (memcmp(this->theLineArray[0], "frameNum: ", 10) == 0) {
         this->theFrameNumberIndex = 10;
+        this->theFrameNumber = phwangDecodeNumber(this->frameNumberStr(), strlen(this->frameNumberStr()));
+        //printf("%i\n", this->theFrameNumber);
         this->porcessNormalFrame();
     }
     else {
@@ -57,6 +59,8 @@ void MmwFrameClass::porcessNormalFrame (void)
 
 
     this->thePointNumberIndex = 14;
+    this->thePointNumber = phwangDecodeNumber(this->pointeNumberStr(), strlen(this->pointeNumberStr()));
+    //printf("%i\n", this->thePointNumber);
     this->debug(false, "porcessNormalFrame", this->pointeNumberStr());
 }
 

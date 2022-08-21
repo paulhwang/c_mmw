@@ -18,8 +18,10 @@ class MmwFrameClass {
     int theFrameType;
 
     int theFrameNumberIndex = 0;
+    int theFrameNumber;
     char *frameNumberStr(void) { return this->theLineArray[0] + this->theFrameNumberIndex; }
     int thePointNumberIndex = 0;
+    int thePointNumber;
     char *pointeNumberStr(void) { return this->theLineArray[1] + this->thePointNumberIndex; }
     char **clouePointStrArray(void) { return &this->theLineArray[2]; }
 
