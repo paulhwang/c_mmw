@@ -34,20 +34,20 @@ void MmwFrameClass::parseFrame (void)
         this->theFrameNumberIndex = 10;
         this->theFrameNumber = phwangDecodeNumber(this->frameNumberStr(), strlen(this->frameNumberStr()));
         //printf("%i\n", this->theFrameNumber);
-        this->porcessNormalFrame();
+        this->parseNormalFrame();
     }
     else {
-        this->porcessHeaderFrame();
+        this->parseHeaderFrame();
     }
 }
 
 
-void MmwFrameClass::porcessHeaderFrame (void)
+void MmwFrameClass::parseHeaderFrame (void)
 {
     this->theFrameType = MMW_FRAME_CLASS_TYPE_HEADER;
 }
 
-void MmwFrameClass::porcessNormalFrame (void)
+void MmwFrameClass::parseNormalFrame (void)
 {
     this->theFrameType = MMW_FRAME_CLASS_TYPE_NORMAL;
     this->debug(false, "porcessNormalFrame", this->frameNumberStr());
@@ -57,11 +57,32 @@ void MmwFrameClass::porcessNormalFrame (void)
         return;
     }
 
-
     this->thePointNumberIndex = 14;
     this->thePointNumber = phwangDecodeNumber(this->pointeNumberStr(), strlen(this->pointeNumberStr()));
-    //printf("%i\n", this->thePointNumber);
+    printf("thePointNumber=%i\n", this->thePointNumber);
     this->debug(false, "porcessNormalFrame", this->pointeNumberStr());
+
+    printf("targetStr=%s\n", this->targetStrArray()[0]);
+    printf("idleMappingStr=%s\n", this->idleMappingStr());
+
+    if (memcmp(this->idleMappingStr(), "[]", 2) == 0) {
+        this->parseIdleFrame();
+    }
+    else {
+        this->parseActiveFrame();
+    }
+}
+
+void MmwFrameClass::parseIdleFrame (void)
+{
+    this->debug(true, "parseIdleFrame", this->frameNumberStr());
+    //printf("idleMappingStr=%s\n", this->idleMappingStrArray()[0]);
+}
+
+void MmwFrameClass::parseActiveFrame (void)
+{
+    this->debug(true, "parseActiveFrame", this->frameNumberStr());
+     printf("activeMappingStr=%s\n", this->activeMappingStr());
 }
 
 void MmwFrameClass::logit (char const *str0_val, char const *str1_val)

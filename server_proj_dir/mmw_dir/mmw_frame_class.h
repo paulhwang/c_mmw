@@ -24,9 +24,14 @@ class MmwFrameClass {
     int thePointNumber;
     char *pointeNumberStr(void) { return this->theLineArray[1] + this->thePointNumberIndex; }
     char **clouePointStrArray(void) { return &this->theLineArray[2]; }
+    char **targetStrArray(void) { return &this->theLineArray[2 + this->thePointNumber]; }
+    char *idleMappingStr(void) { return this->theLineArray[2 + this->thePointNumber + 13]; }
+    char *activeMappingStr(void) { return this->theLineArray[2 + this->thePointNumber + 16]; }
 
-    void porcessHeaderFrame(void);
-    void porcessNormalFrame(void);
+    void parseHeaderFrame(void);
+    void parseNormalFrame(void);
+    void parseIdleFrame(void);
+    void parseActiveFrame(void);
 
     void debug(int on_off_val, char const *str0_val, char const *str1_val) { if (on_off_val) this->logit(str0_val, str1_val); };
     void logit(char const *str0_val, char const *str1_val);
