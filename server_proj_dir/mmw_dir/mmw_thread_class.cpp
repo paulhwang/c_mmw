@@ -29,5 +29,6 @@ void MmwClass::inputThreadFunction (void)
     this->debug(false, "inputThreadFunction", "");
     while (1) {
         this->theMmwInputObject->readInput("data/walking_around.txt");
+        return;
     }
 }

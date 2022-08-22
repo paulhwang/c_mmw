@@ -10,10 +10,9 @@
 
 MmwInputClass::MmwInputClass (MmwClass *mmw_object_val)
 {
+    //memset(this, 0, sizeof(*this));
     this->debug(true, "MmwInputClass", "start");
     this->theMmwObject = mmw_object_val;
-
-    this->readInput("data/walking_around.txt");
 }
 
 MmwInputClass::~MmwInputClass (void)
