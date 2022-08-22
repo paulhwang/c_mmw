@@ -12,7 +12,6 @@ class MmwFrameClass;
 class MmwInputClass {
     MmwClass *theMmwObject;
 
-    void readInput(char const *filename_ptr);
     FILE *openFile(char const *filename_val, char const *mode_val);
     MmwFrameClass *readFrame(FILE *fp_val, char **first_line_ptr_val, int *eof_val);
     void readNonemptyLine(FILE *fp_val, char *buf_val, int *eof_val);
@@ -23,6 +22,8 @@ class MmwInputClass {
     void abend(char const *str0_val, char const *str1_val);
 
   public:
+    void readInput(char const *filename_ptr);
+    
     MmwInputClass(MmwClass *mmw_object_val);
     ~MmwInputClass(void);
     char const *objectName(void) {return "MmwInputClass";}
