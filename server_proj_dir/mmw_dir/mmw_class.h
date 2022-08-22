@@ -15,6 +15,8 @@ class MmwClass {
     MmwInputClass *theMmwInputObject;
     pthread_t theInputThread;
 
+    MmwInputClass *mmwInputObject(void) { return this->theMmwInputObject; }
+
     void startInputThread(void);
 
     void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};

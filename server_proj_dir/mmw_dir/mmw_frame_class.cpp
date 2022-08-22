@@ -59,11 +59,11 @@ void MmwFrameClass::parseNormalFrame (void)
 
     this->thePointNumberIndex = 14;
     this->thePointNumber = phwangDecodeNumber(this->pointeNumberStr(), strlen(this->pointeNumberStr()));
-    printf("thePointNumber=%i\n", this->thePointNumber);
+    //printf("thePointNumber=%i\n", this->thePointNumber);
     this->debug(false, "porcessNormalFrame", this->pointeNumberStr());
 
-    printf("targetStr=%s\n", this->targetStrArray()[0]);
-    printf("idleMappingStr=%s\n", this->idleMappingStr());
+    //printf("targetStr=%s\n", this->targetStrArray()[0]);
+    //printf("idleMappingStr=%s\n", this->idleMappingStr());
 
     if (memcmp(this->idleMappingStr(), "[]", 2) == 0) {
         this->parseIdleFrame();

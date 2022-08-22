@@ -27,8 +27,17 @@ void MmwClass::startInputThread (void)
 void MmwClass::inputThreadFunction (void)
 {
     this->debug(false, "inputThreadFunction", "");
+
+    int open_result = this->mmwInputObject()->openFile("data/walking_around.txt", "r");
+    if (open_result == -1) {
+        this->logit("openFile", "cannot open file");
+        return;
+    }
+
+    this->mmwInputObject()->readIdleData();
+    
     while (1) {
-        this->theMmwInputObject->readInput("data/walking_around.txt");
+        this->mmwInputObject()->readInput();
         return;
     }
 }

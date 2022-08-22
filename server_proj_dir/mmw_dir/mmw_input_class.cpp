@@ -20,21 +20,20 @@ MmwInputClass::~MmwInputClass (void)
     this->debug(true, "~MmwInputClass", "exit");
 }
 
-void MmwInputClass::readInput(char const *filename_ptr) {
-    FILE *fp = this->openFile(filename_ptr, "r");
-    if (fp == 0) {
-        this->logit("openFile", "cannot open file");
-        return;
-    }
+void MmwInputClass::readIdleData (void) {
+
+}
+
+void MmwInputClass::readInput (void) {
     
     int eof;
     char *first_line = 0;
-    MmwFrameClass *frame_object = this->readFrame(fp, &first_line, &eof);
+    MmwFrameClass *frame_object = this->readFrame(this->fpInput(), &first_line, &eof);
     frame_object->printFrameArray();
     delete frame_object;
 
     while (1) {
-        frame_object = this->readFrame(fp, &first_line, &eof);
+        frame_object = this->readFrame(this->fpInput(), &first_line, &eof);
 
         if (frame_object) {
             frame_object->printFrameArrayBrief();
@@ -48,7 +47,7 @@ void MmwInputClass::readInput(char const *filename_ptr) {
     }
 }
 
-MmwFrameClass *MmwInputClass::readFrame(FILE *fp_val, char **first_line_ptr_val, int *eof_val) {
+MmwFrameClass *MmwInputClass::readFrame (FILE *fp_val, char **first_line_ptr_val, int *eof_val) {
     MmwFrameClass *frame_object = new MmwFrameClass();
 
     if (*first_line_ptr_val) {
@@ -82,7 +81,7 @@ MmwFrameClass *MmwInputClass::readFrame(FILE *fp_val, char **first_line_ptr_val,
 }
 
 
-void MmwInputClass::readNonemptyLine(FILE *fp_val, char *line_buf_val, int *eof_val) {
+void MmwInputClass::readNonemptyLine (FILE *fp_val, char *line_buf_val, int *eof_val) {
     while (1) {
         this->readLine(fp_val, line_buf_val, eof_val);
 
@@ -97,7 +96,7 @@ void MmwInputClass::readNonemptyLine(FILE *fp_val, char *line_buf_val, int *eof_
 }
 
 
-void MmwInputClass::readLine(FILE *fp_val, char *line_buf_val, int *eof_val) {
+void MmwInputClass::readLine (FILE *fp_val, char *line_buf_val, int *eof_val) {
     int index = 0;
 
     while (1) {
@@ -124,17 +123,15 @@ void MmwInputClass::readLine(FILE *fp_val, char *line_buf_val, int *eof_val) {
      return;
 }
 
-FILE *MmwInputClass::openFile(char const *filename_val, char const *mode_val)
+int MmwInputClass::openFile (char const *filename_val, char const *mode_val)
 {
-    FILE *fp;
-
-    fp = fopen(filename_val, mode_val);
-    if (fp == 0) {
+    this->theFpInput = fopen(filename_val, mode_val);
+    if (this->theFpInput == 0) {
         this->logit("openFile", "cannot open file");
-        return 0;
+        return -1;
     }
 
-    return fp;
+    return 0;
 }
 
 void MmwInputClass::logit (char const *str0_val, char const *str1_val)
