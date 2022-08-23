@@ -28,6 +28,7 @@ class MmwClass {
 
   public:
     void inputThreadFunction(void);
+    char *readInputData(void);
 
     MmwClass(ServerRootClass *server_root_object_val);
     ~MmwClass(void);

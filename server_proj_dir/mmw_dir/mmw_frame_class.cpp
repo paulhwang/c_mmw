@@ -85,6 +85,7 @@ void MmwFrameClass::parseIdleFrame (void)
 
 void MmwFrameClass::parseActiveFrame (void)
 {
+    this->theFrameType = MMW_FRAME_CLASS_TYPE_ACTIVE;
     this->debug(true, "parseActiveFrame", this->frameNumberStr());
     //printf("activeMappingStr=%s\n", this->activeMappingStr());
     for (int i = 0; i < 16; i++) {
@@ -93,9 +94,9 @@ void MmwFrameClass::parseActiveFrame (void)
     }
 }
 
-void *MmwFrameClass::generateData (void)
+char *MmwFrameClass::generateData (void)
 {
-    return 0;
+    return this->targetStrArray()[0];
 }
 
 void MmwFrameClass::logit (char const *str0_val, char const *str1_val)

@@ -27,6 +27,16 @@ MmwClass::~MmwClass (void)
     this->debug(true, "~MmwClass", "exit");
 }
 
+char *MmwClass::readInputData (void)
+{
+    char *data = (char *) phwangDequeue(this->theInputQueue, "MmwClass");
+    if (data) {
+        this->debug(false, "readInputData", "data");
+    }
+
+    return data;
+}
+
 void MmwClass::logit (char const *str0_val, char const *str1_val)
 {
     char s[LOGIT_BUF_SIZE];

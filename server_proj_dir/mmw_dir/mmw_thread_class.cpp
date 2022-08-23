@@ -55,12 +55,19 @@ void MmwClass::inputThreadFunction (void)
         if (frame_object) {
             frame_object->printFrameArrayBrief();
             frame_object->parseFrame();
-            phwangEnqueue(this->theInputQueue, frame_object->generateData());
+            if (frame_object->frameTypeActive()) {
+                phwangEnqueue(this->theInputQueue, frame_object->generateData());
+            }
         }
 
         if (eof) {
             //printf("*********************EOF************\n");
             break;
         }
+    }
+
+    while (1) {
+        char *data = this->readInputData();
+        printf("data=%s\n", data);
     }
 }

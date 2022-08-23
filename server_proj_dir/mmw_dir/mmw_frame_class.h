@@ -17,6 +17,7 @@ class MmwFrameClass {
     char **theLineArray;
     int theFrameType;
 
+
     int theFrameNumberIndex;
     int theFrameNumber;
     char *frameNumberStr(void) { return this->theLineArray[0] + this->theFrameNumberIndex; }
@@ -51,9 +52,9 @@ class MmwFrameClass {
         }
     }
 
-
+    int frameTypeActive(void) { return this->theFrameType == MMW_FRAME_CLASS_TYPE_ACTIVE; }
     void parseFrame(void);
-    void *generateData(void);
+    char *generateData(void);
 
     MmwFrameClass(void);
     ~MmwFrameClass(void);
