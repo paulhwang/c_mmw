@@ -59,8 +59,8 @@ void MmwClass::inputThreadFunction (void)
                 if (!frame_object->floatingData()) {
                     phwangEnqueue(this->theInputQueue, frame_object->generateData());
                 }
-                delete frame_object;
             }
+            delete frame_object;
         }
 
         if (eof) {
