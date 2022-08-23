@@ -14,6 +14,8 @@ MmwInputClass::MmwInputClass (MmwClass *mmw_object_val)
 
     memset(this, 0, sizeof(*this));
     this->theMmwObject = mmw_object_val;
+
+    this->theInputQueue = phwangMallocSuspendedQueue(MMW_INPUT_CLASS_INPUT_QUEUE_SIZE);
 }
 
 MmwInputClass::~MmwInputClass (void)
