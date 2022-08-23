@@ -53,6 +53,7 @@ class MmwFrameClass {
     }
 
     int frameTypeActive(void) { return this->theFrameType == MMW_FRAME_CLASS_TYPE_ACTIVE; }
+    int floatingData(void) { return memcmp(this->targetStrArray()[0], "[[ 0. ", 6) != 0; }
     void parseFrame(void);
     char *generateData(void);
 

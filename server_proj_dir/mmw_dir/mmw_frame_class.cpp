@@ -106,6 +106,7 @@ char *MmwFrameClass::generateData (void)
     for (int i = 0; i < 4; i++) {
         strcat(s, this->targetStrArray()[i]);
     }
+    
     return s;
 }
 
