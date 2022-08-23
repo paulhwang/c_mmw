@@ -11,7 +11,11 @@ MmwFrameClass::MmwFrameClass (void)
 {
     this->debug(false, "MmwFrameClass", "start");
 
-    this->theArraySize = 0;
+    memset(this, 0, sizeof(*this));
+    this->theMaxArraySize = MMW_FRAME_CLASS_MAX_ARRAY_SIZE;
+    //this->theFrameNumberIndex = 0;
+    //this->thePointNumberIndex = 0;
+    //this->theArraySize = 0;
     this->theLineArray = (char **) malloc(sizeof(char *) * this->theMaxArraySize);
     memset(this->theLineArray, 0, sizeof(char *) * this->theMaxArraySize);
 }

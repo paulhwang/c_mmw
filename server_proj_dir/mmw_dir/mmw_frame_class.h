@@ -12,15 +12,15 @@
 #define MMW_FRAME_CLASS_TYPE_ACTIVE 2
 
 class MmwFrameClass {
-    int const theMaxArraySize = MMW_FRAME_CLASS_MAX_ARRAY_SIZE;
+    int theMaxArraySize;
     int theArraySize;
     char **theLineArray;
     int theFrameType;
 
-    int theFrameNumberIndex = 0;
+    int theFrameNumberIndex;
     int theFrameNumber;
     char *frameNumberStr(void) { return this->theLineArray[0] + this->theFrameNumberIndex; }
-    int thePointNumberIndex = 0;
+    int thePointNumberIndex;
     int thePointNumber;
     char *pointeNumberStr(void) { return this->theLineArray[1] + this->thePointNumberIndex; }
     char **clouePointStrArray(void) { return &this->theLineArray[2]; }

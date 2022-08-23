@@ -12,12 +12,12 @@ class MmwFrameClass;
 class MmwInputClass {
     MmwClass *theMmwObject;
     FILE *theFpInput;
+    char *thePrevFrameNum;
 
     FILE *fpInput(void) { return this->theFpInput; }
 
-    MmwFrameClass *readFrame(FILE *fp_val, char **first_line_ptr_val, int *eof_val);
-    void readNonemptyLine(FILE *fp_val, char *buf_val, int *eof_val);
-    void readLine(FILE *fp_val, char *buf_val, int *eof_val);
+    void readNonemptyLine(char *buf_val, int *eof_val);
+    void readLine(char *buf_val, int *eof_val);
 
     void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
     void logit(char const *str0_val, char const *str1_val);
@@ -25,8 +25,7 @@ class MmwInputClass {
 
   public:
     int openFile(char const *filename_val, char const *mode_val);
-    void readIdleData(void);
-    void readInput(void);
+    MmwFrameClass *readFrame(int *eof_val);
     
     MmwInputClass(MmwClass *mmw_object_val);
     ~MmwInputClass(void);

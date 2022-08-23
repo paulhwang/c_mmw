@@ -11,8 +11,9 @@
 
 MmwClass::MmwClass (ServerRootClass *server_root_object_val)
 {
-    memset(this, 0, sizeof(*this));
     this->debug(true, "MmwClass", "start");
+    
+    memset(this, 0, sizeof(*this));
     this->theServerRootObject = server_root_object_val;
     this->theMmwInputObject = new MmwInputClass(this);
     this->startInputThread();

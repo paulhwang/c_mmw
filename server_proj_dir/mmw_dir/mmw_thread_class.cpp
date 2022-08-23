@@ -7,6 +7,7 @@
 #include "../../phwang_dir/phwang.h"
 #include "mmw_class.h"
 #include "mmw_input_class.h"
+#include "mmw_frame_class.h"
 
 void *MmwClassInputThreadFunction (void *fabric_object_val)
 {
@@ -28,16 +29,37 @@ void MmwClass::inputThreadFunction (void)
 {
     this->debug(false, "inputThreadFunction", "");
 
-    int open_result = this->mmwInputObject()->openFile("data/walking_around.txt", "r");
+    int open_result = this->mmwInputObject()->openFile("../data/mmw_data.txt", "r");
     if (open_result == -1) {
         this->logit("openFile", "cannot open file");
         return;
     }
 
-    this->mmwInputObject()->readIdleData();
-    
-    while (1) {
-        this->mmwInputObject()->readInput();
+    int eof;
+    MmwFrameClass *frame_object;
+
+    /* read header first */
+    frame_object = this->mmwInputObject()->readFrame(&eof);
+
+    if (frame_object) {
+        frame_object->printFrameArray();
+        delete frame_object;
+    }
+    if (eof) {
         return;
+    }
+
+    while (1) {
+        frame_object = this->mmwInputObject()->readFrame(&eof);
+
+        if (frame_object) {
+            frame_object->printFrameArrayBrief();
+            frame_object->parseFrame();
+        }
+
+        if (eof) {
+            //printf("*********************EOF************\n");
+            break;
+        }
     }
 }
