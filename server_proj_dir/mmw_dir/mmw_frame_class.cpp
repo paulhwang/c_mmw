@@ -93,6 +93,11 @@ void MmwFrameClass::parseActiveFrame (void)
     }
 }
 
+void *MmwFrameClass::generateData (void)
+{
+    return 0;
+}
+
 void MmwFrameClass::logit (char const *str0_val, char const *str1_val)
 {
     char s[LOGIT_BUF_SIZE];

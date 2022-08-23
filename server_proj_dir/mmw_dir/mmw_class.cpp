@@ -15,6 +15,9 @@ MmwClass::MmwClass (ServerRootClass *server_root_object_val)
     
     memset(this, 0, sizeof(*this));
     this->theServerRootObject = server_root_object_val;
+
+    this->theInputQueue = phwangMallocSuspendedQueue(MMW_CLASS_INPUT_QUEUE_SIZE);
+
     this->theMmwInputObject = new MmwInputClass(this);
     this->startInputThread();
 }

@@ -7,6 +7,8 @@
 #pragma once
 #include <pthread.h>
 
+#define MMW_CLASS_INPUT_QUEUE_SIZE 3000
+
 class ServerRootClass;
 class MmwInputClass;
 
@@ -14,6 +16,7 @@ class MmwClass {
     ServerRootClass *theServerRootObject;
     MmwInputClass *theMmwInputObject;
     pthread_t theInputThread;
+    void *theInputQueue;
 
     MmwInputClass *mmwInputObject(void) { return this->theMmwInputObject; }
 

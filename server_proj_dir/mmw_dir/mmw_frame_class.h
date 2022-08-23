@@ -53,6 +53,7 @@ class MmwFrameClass {
 
 
     void parseFrame(void);
+    void *generateData(void);
 
     MmwFrameClass(void);
     ~MmwFrameClass(void);

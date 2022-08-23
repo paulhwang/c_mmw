@@ -6,8 +6,6 @@
 
 #pragma once
 
-#define MMW_INPUT_CLASS_INPUT_QUEUE_SIZE 3000
-
 class MmwClass;
 class MmwFrameClass;
 
@@ -15,7 +13,6 @@ class MmwInputClass {
     MmwClass *theMmwObject;
     FILE *theFpInput;
     char *thePrevFrameNum;
-    void *theInputQueue;
 
     void readNonemptyLine(char *buf_val, int *eof_val);
     void readLine(char *buf_val, int *eof_val);

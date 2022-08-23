@@ -55,6 +55,7 @@ void MmwClass::inputThreadFunction (void)
         if (frame_object) {
             frame_object->printFrameArrayBrief();
             frame_object->parseFrame();
+            phwangEnqueue(this->theInputQueue, frame_object->generateData());
         }
 
         if (eof) {
