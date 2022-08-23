@@ -96,7 +96,17 @@ void MmwFrameClass::parseActiveFrame (void)
 
 char *MmwFrameClass::generateData (void)
 {
-    return this->targetStrArray()[0];
+    int buf_len = 1;
+    for (int i = 0; i < 4; i++) {
+        buf_len += strlen(this->targetStrArray()[i]);
+    }
+
+    char *s = (char *) malloc(buf_len);
+    s[0] = 0;
+    for (int i = 0; i < 4; i++) {
+        strcat(s, this->targetStrArray()[i]);
+    }
+    return s;
 }
 
 void MmwFrameClass::logit (char const *str0_val, char const *str1_val)
