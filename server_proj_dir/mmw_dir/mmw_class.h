@@ -7,7 +7,7 @@
 #pragma once
 #include <pthread.h>
 
-#define MMW_CLASS_INPUT_QUEUE_SIZE 3000
+#define MMW_CLASS_INPUT_QUEUE_SIZE 5000
 
 class ServerRootClass;
 class MmwInputClass;
