@@ -14,8 +14,6 @@ class MmwInputClass {
     FILE *theFpInput;
     char *thePrevFrameNum;
 
-    FILE *fpInput(void) { return this->theFpInput; }
-
     void readNonemptyLine(char *buf_val, int *eof_val);
     void readLine(char *buf_val, int *eof_val);
 
