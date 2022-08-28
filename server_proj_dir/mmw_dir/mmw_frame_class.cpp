@@ -94,17 +94,49 @@ void MmwFrameClass::parseActiveFrame (void)
     }
 }
 
+void shift3(char *to_val, char *from_val) {
+    int before_dot = 1;
+    int count_dot = 0;
+
+    for (int i = 0; i < strlen(from_val); i++) {
+        if (before_dot) {
+            if (from_val[i] != '.') {
+                to_val[i] = from_val[i];
+            } else {
+                count_dot = 0;
+                before_dot = 0;
+            }
+        }
+        else {
+            to_val[i - 1] = from_val[i];
+            count_dot++;
+        }
+
+        if (count_dot == 3) {
+            to_val[i] = ']';
+            to_val[i + 1] = 0;
+            break;
+        }
+    }
+
+    printf("dot = %d\n", count_dot);
+    printf("*********%s\n", from_val);
+    printf("*********%s\n", to_val);
+}
+
 char *MmwFrameClass::generateData (void)
 {
     int buf_len = 1;
-    for (int i = 0; i < 4; i++) {
+    for (int i = 1; i < 4; i++) {
         buf_len += strlen(this->targetStrArray()[i]);
     }
 
     char *s = (char *) malloc(buf_len);
     s[0] = 0;
-    for (int i = 0; i < 4; i++) {
-        strcat(s, this->targetStrArray()[i]);
+    for (int i = 1; i < 4; i++) {
+        char buf[32];
+        shift3(buf, this->targetStrArray()[i]);
+        strcat(s, buf);
     }
     
     return s;
