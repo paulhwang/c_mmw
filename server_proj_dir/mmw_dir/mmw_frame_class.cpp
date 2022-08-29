@@ -98,30 +98,35 @@ void shift3(char *to_val, char *from_val) {
     int before_dot = 1;
     int count_dot = 0;
 
-    for (int i = 0; i < strlen(from_val); i++) {
+    for (int i = 0, j = 1; i < strlen(from_val); i++) {
+        if (from_val[i] == ' ') {
+            continue;
+        }
         if (before_dot) {
             if (from_val[i] != '.') {
-                to_val[i] = from_val[i];
+                printf("i=%d j=%d from=%s\n", i, j, from_val);
+                to_val[j++] = from_val[i];
             } else {
                 count_dot = 0;
                 before_dot = 0;
             }
         }
         else {
-            to_val[i - 1] = from_val[i];
+            to_val[j++] = from_val[i];
             count_dot++;
         }
 
         if (count_dot == 3) {
-            to_val[i] = ']';
-            to_val[i + 1] = 0;
+            to_val[j++] = ']';
+            to_val[j] = 0;
+            to_val[0] = strlen(&to_val[1]) + 48;
             break;
         }
     }
 
-    printf("dot = %d\n", count_dot);
-    printf("*********%s\n", from_val);
-    printf("*********%s\n", to_val);
+    //printf("dot = %d\n", count_dot);
+    //printf("*********%s\n", from_val);
+    //printf("*********%s\n", to_val);
 }
 
 char *MmwFrameClass::generateData (void)

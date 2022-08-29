@@ -24,6 +24,7 @@ class DFabricClass {
     void processSetupLink(void *tp_transfer_object_val, char *data_val);
     void processFreeLink(void *tp_transfer_object_val, char *data_val);
     void processGetLinkData(void *tp_transfer_object_val, char *data_val);
+    void processGetMmwData(void *tp_transfer_object_val, char *data_val);
     void processGetNameList(void *tp_transfer_object_val, char *data_val);
     void processSetupSession(void *tp_transfer_object_val, char *data_val);
     void processSetupSession2(void *tp_transfer_object_val, char *data_val);
@@ -34,6 +35,7 @@ class DFabricClass {
     void errorProcessSetupLink(void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val);
     void errorProcessFreeLink(void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val);
     void errorProcessGetLinkData(void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val);
+    void errorProcessGetMmwData(void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val);
     void errorProcessGetNameList(void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val);
     void errorProcessSetupSession(void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val);
     void errorProcessSetupSession2(void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val);
