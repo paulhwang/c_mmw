@@ -104,7 +104,7 @@ void shift3(char *to_val, char *from_val) {
         }
         if (before_dot) {
             if (from_val[i] != '.') {
-                printf("i=%d j=%d from=%s\n", i, j, from_val);
+                //printf("i=%d j=%d from=%s\n", i, j, from_val);
                 to_val[j++] = from_val[i];
             } else {
                 count_dot = 0;
