@@ -7,14 +7,14 @@
 #include "../../phwang_dir/phwang.h"
 #include "mmw_class.h"
 #include "mmw_input_class.h"
-#include "../server_dir/server_root_class.h"
+#include "../fabric_dir/fabric_class.h"
 
-MmwClass::MmwClass (ServerRootClass *server_root_object_val)
+MmwClass::MmwClass (FabricClass *fabric_object_val)
 {
     this->debug(true, "MmwClass", "start");
     
     memset(this, 0, sizeof(*this));
-    this->theServerRootObject = server_root_object_val;
+    this->theFabricObject = fabric_object_val;
 
     this->theInputQueue = phwangMallocSuspendedQueue(MMW_CLASS_INPUT_QUEUE_SIZE);
 

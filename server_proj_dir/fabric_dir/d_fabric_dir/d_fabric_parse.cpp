@@ -18,6 +18,7 @@
 #include "../session_class.h"
 #include "../group_class.h"
 #include "../name_list_class.h"
+#include "../../mmw_dir/mmw_class.h"
 
 int local_service_mml_only = 1;
 
@@ -257,6 +258,7 @@ void DFabricClass::processGetMmwData (void *tp_transfer_object_val, char *data_v
     int name_list_tag = phwangDecodeNumber(name_list_tag_val, NAME_LIST_CLASS_NAME_LIST_TAG_SIZE);
     //char *name_list = this->theFabricObject->nameListObject()->getNameList(name_list_tag);
     char *mmw_data = "[-1245] [ 0552] [-0765]";
+    mmw_data = this->fabricObject()->mmwObject()->readInputData();
 
     char *data_ptr;
     char *downlink_data = data_ptr = (char *) phwangMalloc(strlen(mmw_data) + LINK_MGR_DATA_BUFFER_SIZE + 4, "DFNl");

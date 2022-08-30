@@ -53,6 +53,7 @@ public:
     DFabricClass(FabricClass *fabric_object_val);
     ~DFabricClass(void);
     char const *objectName(void) {return "DFabricClass";}
+    FabricClass *fabricObject(void) {return this->theFabricObject;}
 
     void transmitFunction(void *tp_transfer_object_val, char *data_val);
 

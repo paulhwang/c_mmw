@@ -9,11 +9,11 @@
 
 #define MMW_CLASS_INPUT_QUEUE_SIZE 5000
 
-class ServerRootClass;
+class FabricClass;
 class MmwInputClass;
 
 class MmwClass {
-    ServerRootClass *theServerRootObject;
+    FabricClass *theFabricObject;
     MmwInputClass *theMmwInputObject;
     pthread_t theInputThread;
     void *theInputQueue;
@@ -30,7 +30,7 @@ class MmwClass {
     void inputThreadFunction(void);
     char *readInputData(void);
 
-    MmwClass(ServerRootClass *server_root_object_val);
+    MmwClass(FabricClass *fabric_object_val);
     ~MmwClass(void);
     char const *objectName(void) {return "MmwClass";}
 };

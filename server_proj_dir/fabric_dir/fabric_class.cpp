@@ -12,12 +12,14 @@
 #include "group_class.h"
 #include "link_class.h"
 #include "name_list_class.h"
+#include "../mmw_dir/mmw_class.h"
 
 FabricClass::FabricClass (void)
 {
     memset(this, 0, sizeof(*this));
     this->theUFabricObject = new UFabricClass(this);
     this->theDFabricObject = new DFabricClass(this);
+    this->theMmwObject = new MmwClass(this);
     this->theNameListObject = new NameListClass(this);
     this->theLinkListMgrObject = phwangListMgrMalloc("LINK", LINK_MGR_PROTOCOL_LINK_ID_SIZE, LINK_MGR_PROTOCOL_LINK_INDEX_SIZE, 100);
     this->theGroupListMgrObject = phwangListMgrMalloc("GROUP", GROUP_MGR_PROTOCOL_GROUP_ID_SIZE, GROUP_MGR_PROTOCOL_GROUP_INDEX_SIZE, 500);

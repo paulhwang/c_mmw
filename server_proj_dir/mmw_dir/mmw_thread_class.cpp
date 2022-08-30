@@ -69,8 +69,8 @@ void MmwClass::inputThreadFunction (void)
         }
     }
 
-    while (1) {
-        char *data = this->readInputData();
-        printf("data=%s\n", data);
-    }
+    //while (1) {
+    //    char *data = this->readInputData();
+    //    printf("data=%s\n", data);
+    //}
 }

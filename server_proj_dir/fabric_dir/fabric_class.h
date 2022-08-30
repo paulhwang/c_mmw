@@ -9,6 +9,7 @@
 
 class UFabricClass;
 class DFabricClass;
+class MmwClass;
 class LinkClass;
 class GroupClass;
 class SessionClass;
@@ -17,6 +18,7 @@ class NameListClass;
 class FabricClass {
     UFabricClass *theUFabricObject;
     DFabricClass *theDFabricObject;
+    MmwClass *theMmwObject;
     NameListClass *theNameListObject;
     void *theLinkListMgrObject;
     void *theGroupListMgrObject;
@@ -36,6 +38,7 @@ public:
 
     UFabricClass *uFabricObject(void) {return this->theUFabricObject;}
     DFabricClass *dFabricObject(void) {return this->theDFabricObject;}
+    MmwClass *mmwObject(void) {return this->theMmwObject;}
     NameListClass *nameListObject(void) {return this->theNameListObject;}
     void *linkListMgrObject(void) {return this->theLinkListMgrObject;}
 
